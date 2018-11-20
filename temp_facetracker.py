@@ -92,10 +92,10 @@ def detect_and_draw(frame):
 
         smile = smileCascade.detectMultiScale(
 			roi_gray,
-			scaleFactor= 1.6,
-			minNeighbors=10,
-#			minSize=(10, 10),
-#			maxSize=(30, 30),
+			scaleFactor= 1.2,
+			minNeighbors=5,
+			minSize=(3, 3),
+			maxSize=(30, 30),
 			flags=cv2.CASCADE_SCALE_IMAGE
 		)
 
