@@ -75,29 +75,19 @@ while True:
 		cv2.resize(frame, (300, 300)), 1.0, (300, 300),
 		(104.0, 177.0, 123.0), swapRB=False, crop=False)
 
-	# apply OpenCV's deep learning-based face detector to localize
-	# faces in the input image
 	detector.setInput(imageBlob)
 	detections = detector.forward()
 
-	# loop over the detections
 	for i in range(0, detections.shape[2]):
-		# extract the confidence (i.e., probability) associated with
-		# the prediction
 		confidence = detections[0, 0, i, 2]
 
-		# filter out weak detections
 		if confidence > args["confidence"]:
-			# compute the (x, y)-coordinates of the bounding box for
-			# the face
 			box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
 			(startX, startY, endX, endY) = box.astype("int")
 
-			# extract the face ROI
 			face = frame[startY:endY, startX:endX]
 			(fH, fW) = face.shape[:2]
 
-			# ensure the face width and height are sufficiently large
 			if fW < 20 or fH < 20:
 				continue
 

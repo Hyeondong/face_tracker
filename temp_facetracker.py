@@ -157,14 +157,12 @@ if __name__ == '__main__':
                 midFaceX = midFace[0]
                 midFaceY = midFace[1]
 
-                #Find out if the X component of the face is to the left of the middle of the screen.
+                #얼굴이 화면 왼쪽에 위치할 경우.
                 if(midFaceX < (midScreenX - midScreenWindow)):
-                    #Update the pan position variable to move the servo to the right.
                     servoPanPosition += panStepSize
                     print(str(midFaceX) + " > " + str(midScreenX) + " : Pan Right : " + str(servoPanPosition))
-                #Find out if the X component of the face is to the right of the middle of the screen.
+                #얼굴이 화면 오른쪽에 위치할 경우.
                 elif(midFaceX > (midScreenX + midScreenWindow)):
-                    #Update the pan position variable to move the servo to the left.
                     servoPanPosition -= panStepSize
                     print(str(midFaceX) + " < " + str(midScreenX) + " : Pan Left : " + str(servoPanPosition))
                 else:
@@ -174,9 +172,6 @@ if __name__ == '__main__':
                 servoPanPosition = max(servoPanPosition, min_pwm)
                 move(panGpioPin, servoPanPosition)
 
-                #Find out if the Y component of the face is below the middle of the screen.
-                #if(midFaceY < (midScreenY - midScreenWindow)):
-                    #if(servoTiltPosition <= max_pwm):
                 if(midFaceY > (midScreenY + midScreenWindow)):
                     if(servoTiltPosition >=1):
                         #Update the tilt position variable to lower the tilt servo.
